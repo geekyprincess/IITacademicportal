@@ -1,0 +1,199 @@
+<div class="container">
+	<a class="btn btn-primary btn-lg"  ng-click="new_record()">Add Student Record</a>
+
+	<table class="table table-striped" ng-show='show_all'>
+		<thead>
+			<tr>
+				<th>Student ID</th> 
+				<th>Student Name</th>
+				<th>Department</th> 
+				<th>Year Enrolled</th>
+				<th>Degree</th> 
+				<th>Address</th>
+				<th>Email ID</th> 
+				<th>Contact No</th>
+				<th></th>
+				<th></th>
+			</tr>   
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.stid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.name">
+				</td>
+				<td> 
+					<input type="text" class="form-control" ng-model="querykey.dpid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.year">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.degree">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.address">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.emailid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.contactno">
+				</td>
+				<td>
+					<button class="btn btn-info" ng-click="querysearch(querykey)" > 
+						<span class="glyphicon glyphicon-search"></span> Search</button>
+					</td>
+				</tr>                                        
+				<tr ng-repeat = "data in full_list">
+					<td>{{data.stid}}</td>
+					<td>{{data.name}}</td>
+					<td>{{data.dpid}}</td>
+					<td>{{data.year}}</td>
+					<td>{{data.degree}}</td>
+					<td>{{data.address}}</td>
+					<td>{{data.emailid}}</td>
+					<td>{{data.contactno}}</td>                                                                                       
+					<td>
+						<button class="btn btn-sm" ng-click="displayedit(data.stid)"> 
+							<span class="glyphicon glyphicon-pencil"></span>
+							<span class="glyphicon glyphicon-remove"></span>
+							Open</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+      <div class="container" ng-show="show_AddRecord">
+        <form class="form-horizontal" role="form" name="add_stud">
+          <h2>Add a New Student</h2>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2">Student Id</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="formData.stid" placeholder="Eg. 2016ECE01" required name="stid">
+              <p ng-show="add_stud.stid.$invalid && !add_stud.stid.$pristine" class="help-block">Student ID is required.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2">Student Name</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="formData.name" placeholder="Eg. Firstname Lastname" required name="name">
+              <p ng-show="add_stud.name.$invalid && !add_stud.name.$pristine" class="help-block">Student Name is required.</p> 
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2">Department ID</label>
+            <div class="col-sm-6">
+              <select class="form-control" name = "dpid" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="formData.dpid"></select required> 
+                <p ng-show="add_stud.dpid.$invalid && !add_stud.dpid.$pristine" class="help-block">Department ID is required.</p>
+              </div>
+            </div>                                                                                    
+            <div class="form-group">
+              <label class="control-label col-sm-2">Year Enrolled</label>
+              <div class="col-sm-6">
+                <select class="form-control" name = "year" ng-options ="year as year for year in years_list" ng-model="formData.year" required> </select>
+                <p ng-show="add_stud.year.$invalid && !add_stud.year.$pristine" class="help-block">Year is required.</p>
+              </div>
+            </div>    
+            <div class="form-group">
+              <label class="control-label col-sm-2">Degree</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="degree" ng-options="degree as degree for degree in degree_list"  ng-model="formData.degree" required>
+                </select>
+                <p ng-show="add_stud.degree.$invalid && !add_stud.degree.$pristine" class="help-block">Degree is required.</p>
+              </div>
+            </div>          
+            <div class="form-group">
+              <label class="control-label col-sm-2">Address</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" ng-model="formData.address" required name="address"></textarea>
+                <p ng-show="add_stud.address.$invalid && !add_stud.address.$pristine" class="help-block">Address is required.</p>
+              </div>
+            </div>       
+            <div class="form-group">
+              <label class="control-label col-sm-2">E-mail ID</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="formData.emailid" placeholder="Eg. 4">
+              </div>
+            </div>                        
+            <div class="form-group">
+              <label class="control-label col-sm-2">Contact Number</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="formData.contactno" placeholder="Eg. 4">
+              </div>
+            </div>  
+            <div class="form-group">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary" ng-disabled="add_stud.$invalid" ng-click="add()"> Add Student</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <div class="container" ng-show="show_EditProfile">
+          <form class="form-horizontal" role="form" name="up_stud">
+            <h2>Update the Record</h2>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Student ID</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control"  disabled ng-model="data.stid">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Name</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control" ng-model="data.name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Department</label>
+              <div class="col-sm-6">          
+                <select class="form-control" name = "dpid" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="data.dpid"></select required> 
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Enrollment Year</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control" ng-model="data.year">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Degree</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.degree">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Address</label>
+                <div class="col-sm-6">          
+                  <textarea type="text" class="form-control" ng-model="data.address"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Email ID</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.emailid">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Contact No</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control" ng-model="data.contactno">
+                </div>
+              </div>
+              <div class="form-group">        
+                <div class="col-sm-offset-2 col-sm-10">
+                 <td><button class="btn btn-info" ng-click="updaterecord(data.stid)">Update</button></td>
+                 <td><button class="btn btn-danger" ng-click="delete(data.stid)">Delete Record</button></td>
+               </div>
+             </div>
+           </form>
+         </div>
+       </div>

@@ -1,0 +1,32 @@
+<!--login html-->
+<div class = "jumbotron" >
+ <form class="form-horizontal" role="form" name="login_form">
+  <h2>Login into account</h2>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2">user id</label>
+    <div class="col-sm-6">          
+      <input type="text" class="form-control" ng-model="data.userid">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">password</label>
+    <div class="col-sm-6">          
+      <input type="password" class="form-control" ng-model="data.password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">User type</label>
+    <div class="col-sm-6">          
+      <select class="form-control" name = "type" ng-options ="type as type for type in user_list" ng-model="data.type"></select required> 
+
+      </div>
+    </div>
+
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+       <td><button class="btn btn-info" ng-click="login_user(data)">login</button></td>
+     </div>
+   </div>
+ </form>
+</div>

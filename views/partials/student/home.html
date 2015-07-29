@@ -1,0 +1,16 @@
+<div class="containter">
+    <div class="jumbotron">
+        <h1>Welcome to Student Portal!</h1>
+        <label class="control-label col-sm-2"><h4>View Records</h4></label>
+        <select class="selectpicker btn-primary btn-lg col-sm-2" 
+        ng-options="option.name for option in listOfOptions" 
+        ng-model="selectedItem"
+        ng-change="selectedItemChanged()">
+        </select>
+        <td><a href="#/"><button class="btn btn-warning pull-right" ng-click="logout()">Log Out</button></a></td>
+    </div>
+    <div class="slide-animate-container">
+        <div class="slide-animate" ng-include="selectedItem.url"></div>
+    </div>
+</div>
+

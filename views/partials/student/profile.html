@@ -1,0 +1,58 @@
+                    <div class="container">
+                      <form class="form-horizontal" role="form" name="up_stud">
+                        <h2>My Profile</h2>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2">Student ID</label>
+                          <div class="col-sm-6">          
+                            <input type="text" class="form-control"  disabled ng-model="data.stid">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2">Name</label>
+                          <div class="col-sm-6">          
+                            <input type="text" class="form-control" disabled ng-model="data.name">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2">Department</label>
+                          <div class="col-sm-6">          
+                            <input type="text" class="form-control" disabled ng-model="data.dpid">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2">Enrollment Year</label>
+                            <div class="col-sm-6">          
+                              <input type="text" class="form-control" ng-model="data.year" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2">Degree</label>
+                            <div class="col-sm-6">          
+                              <input type="text" class="form-control"  ng-model="data.degree" disabled>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2">Address</label>
+                            <div class="col-sm-6">          
+                              <textarea type="text" class="form-control" ng-model="data.address"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2">Email ID</label>
+                            <div class="col-sm-6">          
+                              <input type="text" class="form-control"  ng-model="data.emailid">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-2">Contact No</label>
+                            <div class="col-sm-6">          
+                              <input type="text" class="form-control" ng-model="data.contactno">
+                            </div>
+                          </div>
+                          <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-10">
+                             <td><button class="btn btn-info" ng-click="updaterecord(data)">Update</button></td>
+                           </div>
+                         </div>
+                       </form>
+                     </div>

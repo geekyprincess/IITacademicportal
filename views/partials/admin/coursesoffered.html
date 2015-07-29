@@ -1,0 +1,232 @@
+<div class="container">
+   <a class="btn btn-primary btn-lg"  ng-click="new_record()">Add Course Offered</a>
+   <table class="table table-striped" ng-show="show_all">
+      <thead>
+         <tr>
+            <th>Course ID</th>
+            <th>Faculty ID</th>
+            <th>Semester ID</th>
+            <th>Slot ID</th>
+            <th>Number of seats</th>
+            <th>Total Applicants</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.crid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.facid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.semid">
+               <!--select class="form-control"
+                  ng-model="querykey.semid" ng-options="x
+                  for x in sem_list"></select-->
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.slotid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.numseats">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.totalapplicants">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.statuscode">
+               <!--select class="form-control"
+                  ng-model="querykey.statuscode" ng-options="x
+                  for x in status_list"></select-->
+            </td>
+            <td>
+               <button class="btn btn-primary" ng-click="querysearch(querykey)" > 
+               <span class="glyphicon glyphicon-search"></span>
+               Search</button>
+            </td>
+         </tr>
+         <tr ng-repeat = "data in full_list">
+            <td>{{data.crid}}</td>
+            <td>{{data.facid}}</td>
+            <td>{{data.semid}}</td>
+            <td>{{data.slotid}}</td>
+            <td>{{data.numseats}}</td>
+            <td>{{data.totalapplicants}}</td>
+            <td>{{data.statuscode}}</td>
+            <td><button class="btn btn-primary"
+               ng-click="displayedit(data.crid,
+               data.facid, data.semid)"> 
+               <span class="glyphicon glyphicon-pencil"></span>
+               <span class="glyphicon glyphicon-remove"></span>Open Record</button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <div class="container" ng-show="show_AddRecord">
+      <form class="form-horizontal" role="form"
+         name="add_courses_offered">
+         <h2>Add a New Course Offering</h2>
+         <div class="form-group">
+            <label class="control-label
+               col-sm-2">Course Id</label>
+            <div class="col-sm-6">
+              <select class="form-control" name = "crid" 
+              ng-options ="o.crid as o.crid + '- ' + o.coursename for o in crid_list" 
+              ng-model="formData.crid"></select required> 
+               <p
+                  ng-show="add_courses_offered.crid.$invalid
+                  &&
+                  !add_courses_offered.crid.$pristine"
+                  class="help-block">Course ID is required.</p>
+            </div>
+         </div>
+         <div class="form-group">
+            <label class="control-label
+               col-sm-2">Faculty Id</label>
+            <div class="col-sm-6">
+              <select class="form-control" name = "fcid" 
+              ng-options ="o.fcid as o.fcid + '- ' + o.name for o in fcid_list" 
+              ng-model="formData.facid"></select required> 
+               <p
+                  ng-show="add_courses_offered.facid.$invalid
+                  &&
+                  !add_courses_offered.facid.$pristine"
+                  class="help-block">Faculty Id is required.</p>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label class="control-label
+               col-sm-2">Semester ID</label>
+            <div class="col-sm-6">
+               <select class="form-control" name =
+                  "semid"
+                  ng-model="formData.semid"
+                  ng-options ="o for o in sem_list" >
+                  </select required> 
+                  <p
+                     ng-show="add_courses_offered.semid.$invalid
+                     &&
+                     !add_courses_offered.semid.$pristine"
+                     class="help-block">Semester ID is required.</p>
+            </div>
+         </div>
+         <div class="form-group">
+         <label class="control-label
+            col-sm-2">Slot ID</label>
+         <div class="col-sm-6">
+         <input class="form-control"
+            type="text" name =
+            "slotid" ng-model="formData.slotid" required>
+         </div>
+         </div>    
+         <div class="form-group">
+         <label class="control-label
+            col-sm-2">Number of seats</label>
+         <div class="col-sm-6">
+         <input type="number" class="form-control"
+            name="numseats"
+            ng-model="formData.numseats" required>
+         </div>
+         </div>          
+         <div class="form-group">        
+         <div class="col-sm-offset-2 col-sm-10">
+         <button class="btn btn-primary"
+            ng-disabled ="add_courses_offered.$invalid" ng-click="add()"> Add Record</button>
+         </div>
+         </div>
+      </form>
+   </div>
+   <div class="container" ng-show="show_EditProfile">
+   <form class="form-horizontal" role="form"
+      name="update_courses_offered">
+   <h2>Update the Record</h2>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Course ID</label>
+   <div class="col-sm-6">          
+   <input type="text"
+      class="form-control"  disabled
+      ng-model="data.crid">
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Faculty ID</label>
+   <div class="col-sm-6">          
+   <input type="text"
+      class="form-control" disabled
+      ng-model="data.facid">
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Semester ID</label>
+   <div class="col-sm-6">          
+   <select class="form-control" name =
+      "semid" ng-options ="o for o in
+      sem_list" ng-model="data.semid"
+      disabled></select > 
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Slot ID</label>
+   <div class="col-sm-6">          
+   <input type="text"
+      class="form-control"
+      ng-model="data.slotid">
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Total number of seats</label>
+   <div class="col-sm-6">          
+   <input type="number"
+      class="form-control"
+      ng-model="data.numseats">
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Total Applicants</label>
+   <div class="col-sm-6">          
+   <input type="number"
+      class="form-control"
+      ng-model="data.totalapplicants">
+   </div>
+   </div>
+   <div class="form-group">
+   <label class="control-label
+      col-sm-2">Status</label>
+   <div class="col-sm-6">          
+   <select class="form-control"
+      ng-model="data.statuscode"
+      ng-options="x for x in
+      status_list"></select>
+   </div>
+   </div>
+   <div class="form-group">        
+   <div class="col-sm-offset-2 col-sm-10">
+   <td><button class="btn btn-info"
+      ng-click="updaterecord(data.crid,
+      data.facid, data.semid)">Update</button></td>
+   <td><button class="btn btn-danger"
+      ng-click="delete(data.crid,
+      data.facid, data.semid)">Delete Record</button></td>
+   </div>
+   </div>
+   </form>
+   </div>
+</div>

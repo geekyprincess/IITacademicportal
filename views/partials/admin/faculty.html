@@ -1,0 +1,184 @@
+<div class="container">
+  <a class="btn btn-primary btn-lg"  ng-click="new_record()">Add New Faculty</a>
+
+  <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Faculty ID</th> 
+        <th>Name</th>
+        <th>Title</th>
+        <th>Department ID</th>
+        <th>Email ID</th>
+        <th>Contact No.</th>
+        <th>Areas</th>
+        <th></th>
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+         <input type="text" class="form-control" ng-model="querykey.fcid">
+       </td>
+       <td>
+        <input type="text" class="form-control" ng-model="querykey.name">
+      </td>
+      <td> 
+        <input type="text" class="form-control" ng-model="querykey.title">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.dpid">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.emailid">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.cotnactno">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.areas">
+      </td>
+      <td>
+      </td>
+      <td>
+        <button class="btn btn-info" ng-click="querysearch(querykey)" >
+          <span class="glyphicon glyphicon-search"></span> Search</button>
+        </td>
+      </tr>
+      <tr ng-repeat = "data in full_list">
+        <td>{{data.fcid}}</td>
+        <td>{{data.name}}</td>
+        <td> {{data.title}}</td>
+        <td>{{data.dpid}} </td>
+        <td>{{data.emailid}} </td>
+        <td> {{data.contactno}} </td>
+        <td>{{data.areas}}</td> 
+        <td>
+          <button class="btn btn-sm" ng-click="displayedit(data.fcid)"> 
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            Open</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="container" ng-show="show_AddRecord">
+      <form class="form-horizontal" role="form" name="add_faculty" novalidate>
+        <h2>Add a New Record</h2>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2">Faculty Id</label>
+          <div class="col-sm-6">
+            <input type="text" name="fcid" class="form-control" ng-model="formData.fcid" placeholder="Eg. CSE" required>
+            <p ng-show="add_faculty.fcid.$invalid && !add_faculty.fcid.$pristine" class="help-block">faculty ID is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Name</label>
+          <div class="col-sm-6">          
+            <input type="text" name="name" class="form-control"  ng-model="formData.name" placeholder="Eg. (Mr/Ms) Name Surname" required>
+            <p ng-show="add_faculty.name.$invalid && !add_faculty.name.$pristine" class="help-block"> Name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" >Title</label>
+          <div class="col-sm-6">          
+            <input type="text" class="form-control" ng-model="formData.title" name ="title"placeholder="F / M / O" required>
+            <p ng-show="add_faculty.title.$invalid && !add_faculty.title.$pristine" class="help-block"> Name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department ID</label>
+          <div class="col-sm-6">   
+            <select class="form-control" name = "dpid" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="formData.dpid"></select required>       
+              <p ng-show="add_faculty.dpid.$invalid && !add_faculty.dpid.$pristine" class="help-block"> dpid is required.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">Email ID</label>
+            <div class="col-sm-6">          
+              <input type="email" name ="emailid" class="form-control"  ng-model="formData.emailid" placeholder="emailidname">
+              <p ng-show="add_faculty.emailid.$invalid && !add_faculty.emailid.$pristine" class="help-block"> emailid is required.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">Contact No</label>
+            <div class="col-sm-6">          
+              <input type="text" name ="contactno"class="form-control"  ng-model="formData.contactno" placeholder="contactnoname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">Areas</label>
+            <div class="col-sm-6">          
+              <input name ="areas"type="text" class="form-control"  ng-model="formData.areas" placeholder="areasname">
+            </div>
+          </div>
+          <div class="form-group">        
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-primary" ng-disabled ="add_faculty.$invalid"ng-click="add()"> Add Record</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Start of Faculty Update-->
+      <div>
+        <div class="container" ng-show="show_EditProfile">
+          <form class="form-horizontal" role="form" name="up_fac">
+            <h2>Update the Record</h2>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Faculty ID</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control"  disabled ng-model="data.fcid">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">Name</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control"  ng-model="data.name" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Title</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control" ng-model="data.title" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Dapartment ID</label>
+              <div class="col-sm-6"> 
+                <select class="form-control" name = "dpid" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="data.dpid"></select required> 
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Email ID</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.emailid" >
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Contact No.</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.contactno">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Areas</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.areas" >
+                </div>
+              </div>
+              <div class="form-group">        
+                <div class="col-sm-offset-2 col-sm-10">
+                 <td><button class="btn btn-info" ng-click="updaterecord(data.fcid)">Update</button></td>
+                 <td><button class="btn btn-danger" ng-click="delete(data.fcid)">Delete Record</button></td>
+               </div>
+             </div>
+           </form>
+         </div>
+
+       </div>
+       <!-- End of Faculty Update-->
+
+     </div>

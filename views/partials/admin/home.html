@@ -1,0 +1,22 @@
+
+<div class="containter">
+    <div class="jumbotron">
+        <h1>Welcome to Admin Portal</h1>
+        <label class="control-label col-sm-2"><h4>Select a Table</h4></label>
+        <select class="selectpicker btn-primary btn-lg" 
+        ng-options="option.name for option in listOfOptions" 
+        ng-model="selectedItem"
+        ng-change="selectedItemChanged()">
+        <option value="">Admin Home</option>
+    </select>
+    <td><a href="#/"><button class="btn btn-warning pull-right" ng-click="logout()">Log Out</button></a></td>
+    <div>
+        <a class="btn btn-warning" ng-show="show_EditProfile|| show_AddRecord|| show_all" ng-click="back()">
+         All records</a>
+    </div>
+    </div>
+    <div class="slide-animate-container">
+        <div class="slide-animate" ng-include="selectedItem.url"></div>
+    </div>
+</div>
+

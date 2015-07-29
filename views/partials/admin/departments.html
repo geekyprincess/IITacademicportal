@@ -1,0 +1,91 @@
+
+<div class="containter">
+  <a class="btn btn-primary btn-lg"  ng-click="new_record()">Add New Department</a>
+
+  <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Department ID</th> 
+        <th>Department Name</th>
+        <th></th>
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="text" class="form-control" ng-model="querykey.id">
+        </td>
+        <td>
+          <input type="text" class="form-control" ng-model="querykey.name">
+        </td>
+        <td>
+          <button class="btn btn-info" ng-click="querysearch(querykey)" > 
+           <span class="glyphicon glyphicon-search"></span> Search</button>
+         </td>
+       </tr>
+       <tr ng-repeat = "data in full_list">
+        <td>{{data.dpid}}</td>
+        <td>{{data.deptname}}</td>
+        <td>
+          <button class="btn btn-sm" ng-click="displayedit(data.dpid)"> 
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            Open</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="container" ng-show="show_AddRecord">
+      <form class="form-horizontal" role="form" name="add_dept" novalidate>
+        <h2>Add a New Record</h2>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department Id</label>
+          <div class="col-sm-6">
+            <input type="text" name="dpid" class="form-control" ng-model="formData.dpid" placeholder="Eg. CSE" required>
+            <p ng-show="add_dept.dpid.$invalid && !add_dept.dpid.$pristine" class="help-block">Department ID is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department Name</label>
+          <div class="col-sm-6">
+            <input type="text" name="deptname" class="form-control" ng-model="formData.deptname" placeholder="Eg. Computer Science and Engineering" required>
+            <p ng-show="add_dept.deptname.$invalid && !add_dept.deptname.$pristine" class="help-block">Department Name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" ng-disabled="add_dept.$invalid" ng-click="add()"> Add Department</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container" ng-show="show_EditProfile">
+      <form class="form-horizontal" role="form" name="up_dept">
+        <h2>Update the Record</h2>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department ID</label>
+          <div class="col-sm-6">          
+            <input type="text" class="form-control"  disabled ng-model="data.dpid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Department Name</label>
+          <div class="col-sm-6">          
+            <input type="text" class="form-control"  ng-model="data.deptname" required>
+          </div>
+        </div>
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+           <td><button class="btn btn-info" ng-click="updaterecord(data.dpid)">Update</button></td>
+           <td><button class="btn btn-danger" ng-click="delete(data.dpid)">Delete Record</button></td>
+         </div>
+       </div>
+     </form>
+   </div>
+
+   <!-- End of Department Update profile-->
+ </div>

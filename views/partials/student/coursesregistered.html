@@ -1,0 +1,60 @@
+<div class="container">
+   <form class="form-horizontal" role="form"
+      name="add_courses_registered">
+      <h2>Add a New Course Registeration</h2>
+      <div class="form-group">
+         <label class="control-label
+            col-sm-2">Course Id</label>
+         <div class="col-sm-6">
+            <input type="text"
+               class="form-control"
+               ng-model="formData.crid"
+               placeholder="Eg. CS101" required
+               name="crid">
+            <p
+               ng-show="add_courses_registered.crid.$invalid
+               &&
+               !add_courses_registered.crid.$pristine"
+               class="help-block">Course ID is required.</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="control-label
+            col-sm-2">Student Id</label>
+         <div class="col-sm-6">
+            <input type="text"
+               class="form-control"
+               ng-model="formData.stid"
+               placeholder="Eg. 2010CS10101"
+               required name="stid">
+            <p
+               ng-show="add_courses_registered.stid.$invalid
+               &&
+               !add_courses_registered.stid.$pristine"
+               class="help-block">Student Id is required.</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="control-label
+            col-sm-2">Semester ID</label>
+         <div class="col-sm-6">
+            <select class="form-control" name =
+               "semid"
+               ng-model="formData.semid"
+               ng-options ="o for o in sem_list" ></select required> 
+            <p
+               ng-show="add_courses_registered.semid.$invalid
+               &&
+               !add_courses_registered.semid.$pristine"
+               class="help-block">Semester ID is required.</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary"
+               ng-disabled ="add_courses_registered.$invalid" ng-click="add(formData)"> Add Record</button>
+         </div>
+      </div>
+   </form>
+</div>
+<!--end of courses registered-->

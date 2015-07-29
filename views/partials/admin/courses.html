@@ -1,0 +1,155 @@
+<div class="container">         
+  <a class="btn btn-primary btn-lg"  ng-click="new_record()">Add New Course</a>
+
+  <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Course ID</th> 
+        <th>Department ID</th>
+        <th>Course Name</th> 
+        <th>Credits</th>
+        <th>Pre-Req</th> 
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+         <input type="text" class="form-control" ng-model="querykey.crid">
+       </td>
+       <td>
+        <input type="text" class="form-control" ng-model="querykey.dpid">
+      </td>
+      <td> 
+        <input type="text" class="form-control" ng-model="querykey.coursename">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.credits">
+      </td>
+      <td></td>
+      <td >
+        <button class="btn btn-info" ng-click="querysearch(querykey)" > 
+          <span class="glyphicon glyphicon-search"></span> Search</button>
+        </td>
+      </tr>
+      <tr ng-repeat = "data in full_list">
+        <td>{{data.crid}}</td>
+        <td>{{data.dpid}}</td>
+        <td>{{data.coursename}}</td>
+        <td>{{data.credits}}</td>
+        <td>{{data.pre_req1}}  
+          {{data.pre_req2}}
+          {{data.pre_req3}}
+          {{data.pre_req4}}</td>
+          <div  >
+            <td>
+              <button class="btn btn-sm"  ng-click="displayedit(data.crid)"> 
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="glyphicon glyphicon-remove"></span>
+                Open</button>
+              </td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container" ng-show="show_AddRecord">
+        <form class="form-horizontal" role="form" name="add_course">
+          <h2>Add a New Course</h2>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2">* Course Id</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="formData.crid" placeholder="Eg. CSE101" required name="crid">
+              <p ng-show="add_course.crid.$invalid && !add_course.crid.$pristine" class="help-block">Course ID is required.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2">* Department Id</label>
+            <div class="col-sm-6">
+              <select class="form-control" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="formData.dpid"></select required> 
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2">* Course Name</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="formData.coursename" placeholder="Eg. Introdunction to Programming" required name="coursename">
+                <p ng-show="add_course.coursename.$invalid && !add_course.coursename.$pristine" class="help-block">Course name is required.</p>
+              </div>
+            </div>                                                                                    
+            <div class="form-group">
+              <label class="control-label col-sm-2">* Course Credits</label>
+              <div class="col-sm-6">
+
+                <select class="form-control" name = "credits" ng-options ="o as o for o in credit_list "ng-model="formData.credits" required>
+                </select>
+                <p ng-show="add_course.credits.$invalid && !add_course.credits.$pristine" class="help-block">Course Credit is required.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Course Pre Req</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="formData.pre_req1" placeholder="CS101">
+                <input type="text" class="form-control" ng-model="formData.pre_req2" placeholder="CS101">
+                <input type="text" class="form-control" ng-model="formData.pre_req3" placeholder="CS101">
+                <input type="text" class="form-control" ng-model="formData.pre_req4" placeholder="CS101">
+              </div>
+            </div>                                          
+            <div class="form-group">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary" ng-disabled="add_course.$invalid" ng-click="add()"> Add Course</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="container" ng-show="show_EditProfile">
+          <form class="form-horizontal" role="form" name="up_courses">
+            <h2>Update the Record</h2>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Course ID</label>
+              <div class="col-sm-6">          
+                <input type="text" class="form-control"  disabled ng-model="data.crid">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Department ID</label>
+              <div class="col-sm-6">          
+                <select class="form-control" ng-options ="o.dpid as o.dpid + '- ' + o.deptname for o in dpid_list" ng-model="data.dpid"></select required> 
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Course Name</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.coursename">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Credits</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control" ng-model="data.credits">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Pre-Requisites</label>
+                <div class="col-sm-6">          
+                  <input type="text" class="form-control"  ng-model="data.pre_req1">
+                  <input type="text" class="form-control"  ng-model="data.pre_req2">
+                  <input type="text" class="form-control"  ng-model="data.pre_req3">
+                  <input type="text" class="form-control"  ng-model="data.pre_req4">
+                </div>
+              </div>
+
+              <div class="form-group">        
+                <div class="col-sm-offset-2 col-sm-10">
+                 <td><button class="btn btn-info" ng-click="updaterecord(data.crid)">Update</button></td>
+                 <td><button class="btn btn-danger" ng-click="delete(data.crid)">Delete Record</button></td>
+               </div>
+             </div>
+           </form>
+         </div>
+
+       </div>

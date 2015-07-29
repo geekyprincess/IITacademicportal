@@ -1,0 +1,264 @@
+<div class="container" ng-switch on="show_value">
+
+<div ng-switch-when="Departments">
+	 <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Department ID</th> 
+        <th>Department Name</th>
+        <th></th>
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="text" class="form-control" ng-model="querykey.id">
+        </td>
+        <td>
+          <input type="text" class="form-control" ng-model="querykey.name">
+        </td>
+        <td>
+          <button class="btn btn-info" ng-click="querysearch(querykey)" > 
+           <span class="glyphicon glyphicon-search"></span> Search</button>
+         </td>
+       </tr>
+       <tr ng-repeat = "data in full_list">
+        <td>{{data.dpid}}</td>
+        <td>{{data.deptname}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div ng-switch-when="Students">
+		<table class="table table-striped" ng-show='show_all'>
+		<thead>
+			<tr>
+				<th>Student ID</th> 
+				<th>Student Name</th>
+				<th>Department</th> 
+				<th>Year Enrolled</th>
+				<th>Degree</th> 
+				<th>Address</th>
+				<th>Email ID</th> 
+				<th>Contact No</th>
+				<th></th>
+				<th></th>
+			</tr>   
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.stid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.name">
+				</td>
+				<td> 
+					<input type="text" class="form-control" ng-model="querykey.dpid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.year">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.degree">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.address">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.emailid">
+				</td>
+				<td>
+					<input type="text" class="form-control" ng-model="querykey.contactno">
+				</td>
+				<td>
+					<button class="btn btn-info" ng-click="querysearch(querykey)" > 
+						<span class="glyphicon glyphicon-search"></span> Search</button>
+					</td>
+				</tr>                                        
+				<tr ng-repeat = "data in full_list">
+					<td>{{data.stid}}</td>
+					<td>{{data.name}}</td>
+					<td>{{data.dpid}}</td>
+					<td>{{data.year}}</td>
+					<td>{{data.degree}}</td>
+					<td>{{data.address}}</td>
+					<td>{{data.emailid}}</td>
+					<td>{{data.contactno}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+</div>
+
+<div ng-switch-when="Faculty">
+	 <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Faculty ID</th> 
+        <th>Name</th>
+        <th>Title</th>
+        <th>Department ID</th>
+        <th>Email ID</th>
+        <th>Contact No.</th>
+        <th>Areas</th>
+        <th></th>
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+         <input type="text" class="form-control" ng-model="querykey.fcid">
+       </td>
+       <td>
+        <input type="text" class="form-control" ng-model="querykey.name">
+      </td>
+      <td> 
+        <input type="text" class="form-control" ng-model="querykey.title">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.dpid">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.emailid">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.cotnactno">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.areas">
+      </td>
+      <td>
+      </td>
+      <td>
+        <button class="btn btn-info" ng-click="querysearch(querykey)" >
+          <span class="glyphicon glyphicon-search"></span> Search</button>
+        </td>
+      </tr>
+      <tr ng-repeat = "data in full_list">
+        <td>{{data.fcid}}</td>
+        <td>{{data.name}}</td>
+        <td> {{data.title}}</td>
+        <td>{{data.dpid}} </td>
+        <td>{{data.emailid}} </td>
+        <td> {{data.contactno}} </td>
+        <td>{{data.areas}}</td> 
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div ng-switch-when="Courses"> 
+	  <table class="table table-striped" ng-show="show_all">
+    <thead>
+      <tr>
+        <th>Course ID</th> 
+        <th>Department ID</th>
+        <th>Course Name</th> 
+        <th>Credits</th>
+        <th>Pre-Req</th> 
+        <th></th>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+         <input type="text" class="form-control" ng-model="querykey.crid">
+       </td>
+       <td>
+        <input type="text" class="form-control" ng-model="querykey.dpid">
+      </td>
+      <td> 
+        <input type="text" class="form-control" ng-model="querykey.coursename">
+      </td>
+      <td>
+        <input type="text" class="form-control" ng-model="querykey.credits">
+      </td>
+      <td></td>
+      <td >
+        <button class="btn btn-info" ng-click="querysearch(querykey)" > 
+          <span class="glyphicon glyphicon-search"></span> Search</button>
+        </td>
+      </tr>
+      <tr ng-repeat = "data in full_list">
+        <td>{{data.crid}}</td>
+        <td>{{data.dpid}}</td>
+        <td>{{data.coursename}}</td>
+        <td>{{data.credits}}</td>
+        <td>{{data.pre_req1}}  
+          {{data.pre_req2}}
+          {{data.pre_req3}}
+          {{data.pre_req4}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div ng-switch-when="Courses offered">
+	   <table class="table table-striped" ng-show="show_all">
+      <thead>
+         <tr>
+            <th>Course ID</th>
+            <th>Faculty ID</th>
+            <th>Semester ID</th>
+            <th>Slot ID</th>
+            <th>Number of seats</th>
+            <th>Total Applicants</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.crid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.facid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.semid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.slotid">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.numseats">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.totalapplicants">
+            </td>
+            <td>
+               <input type="text" class="form-control"
+                  ng-model="querykey.statuscode">
+            </td>
+            <td>
+               <button class="btn btn-primary" ng-click="querysearch(querykey)" > 
+               <span class="glyphicon glyphicon-search"></span>
+               Search</button>
+            </td>
+         </tr>
+         <tr ng-repeat = "data in full_list">
+            <td>{{data.crid}}</td>
+            <td>{{data.facid}}</td>
+            <td>{{data.semid}}</td>
+            <td>{{data.slotid}}</td>
+            <td>{{data.numseats}}</td>
+            <td>{{data.totalapplicants}}</td>
+            <td>{{data.statuscode}}</td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+</div>
